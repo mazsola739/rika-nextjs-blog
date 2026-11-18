@@ -4,8 +4,16 @@ import styles from './Pagination.module.scss';
 import { PaginationProps } from './Pagination.props';
 import { ArrowLeft, ArrowRight } from '../Icons/Icons';
 
+/**
+ * Controlled pagination built on `react-paginate`.
+ *
+ * Pages are 1-based in the props; `react-paginate` is 0-based, so the values
+ * are converted here. Renders nothing while there are no items.
+ */
 const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  if (totalPages === 0) return null;
 
   const handlePageClick = (selectedItem: { selected: number }) => {
     onPageChange(selectedItem.selected + 1);
@@ -26,16 +34,12 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, curre
         }
         breakLabel="..."
         pageCount={totalPages}
+        forcePage={currentPage - 1}
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
         onPageChange={handlePageClick}
-        containerClassName={styles.pagination}
         activeClassName={styles.active}
         disabledClassName={styles.disabled}
-        previousClassName={styles['page-item']}
-        nextClassName={styles['page-item']}
-        pageClassName={styles['page-item']}
-        breakClassName={styles['break-item']}
       />
     </div>
   );

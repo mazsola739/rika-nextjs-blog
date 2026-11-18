@@ -1,13 +1,12 @@
 import Layout from '@/components/Layout/Layout';
 import BlogPostList from '@/components/BlogPostList/BlogPostList';
 
+/** Home page (`/`): the blog post listing. */
 const HomePage = () => {
   return (
-    <div className="blog-container">
-      <Layout>
-        <BlogPostList />
-      </Layout>
-    </div>
+    <Layout>
+      <BlogPostList />
+    </Layout>
   );
 };
 

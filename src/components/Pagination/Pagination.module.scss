@@ -40,6 +40,16 @@
     color: var(--pagination-hover-text);
     transform: translateY(-2px);
   }
+
+  &.active {
+    background-color: var(--pagination-hover-bg);
+    color: var(--pagination-hover-text);
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
 }
 
 @media (max-width: 768px) {

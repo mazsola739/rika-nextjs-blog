@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
 
+/*
+ * Inline SVG icons. Each accepts the standard SVG props and uses `currentColor`,
+ * so the color can be set with CSS.
+ */
+
 export const ArrowLeft = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={20} height={21} fill="currentColor" {...props}>
     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.67} d="M15.833 10.5H4.167m0 0L10 16.333M4.167 10.5 10 4.667" />

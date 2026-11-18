@@ -7,9 +7,8 @@ interface PostPageProps {
   post: BlogPostType;
 }
 
+/** Post detail page (`/post/[id]`), rendered on the server. */
 const PostPage: React.FC<PostPageProps> = ({ post }) => {
-  if (!post) return <h1>Post not found</h1>;
-
   return (
     <Layout>
       <article>
@@ -21,9 +20,13 @@ const PostPage: React.FC<PostPageProps> = ({ post }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const id = params?.id;
-  const post = await BlogService.fetchPost(Number(id));
+/** Loads the post for the requested id. Responds with a 404 page if the id is invalid or the post does not exist. */
+export const getServerSideProps: GetServerSideProps<PostPageProps> = async ({ params }) => {
+  const id = Number(params?.id);
+  if (!Number.isInteger(id)) return { notFound: true };
+
+  const post = await BlogService.fetchPost(id);
+  if (!post) return { notFound: true };
 
   return {
     props: {

@@ -4,8 +4,12 @@ import MobileMenu from '../MobileMenu/MobileMenu';
 import Nav from '../Nav/Nav';
 import styles from './Header.module.scss';
 
+/**
+ * Site header: logo, navigation and the "THE BLOG" title. On small screens the
+ * navigation is replaced by a hamburger button that opens the {@link MobileMenu}.
+ */
 const Header: React.FC = () => {
-  const { menuOpen, handleMenuToggle } = useMenuToggle();
+  const { menuOpen, handleMenuToggle, closeMenu } = useMenuToggle();
 
   const getMenuAriaLabel = () => (menuOpen ? 'Close menu' : 'Open menu');
 
@@ -20,7 +24,7 @@ const Header: React.FC = () => {
           <HamburgerMenu />
         </button>
       </div>
-      <MobileMenu menuOpen={menuOpen} setMenuOpen={handleMenuToggle} />
+      <MobileMenu menuOpen={menuOpen} onClose={closeMenu} />
       <h1>THE BLOG</h1>
     </header>
   );

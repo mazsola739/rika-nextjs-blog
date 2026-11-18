@@ -2,15 +2,17 @@ import { useTheme } from '@/context/ThemeContext';
 import styles from './ThemeToggle.module.scss';
 import Image from 'next/image';
 
+/** Switch button for the light/dark theme. The sun and moon icons are decorative. */
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
+  const nextTheme = theme === 'light' ? 'dark' : 'light';
 
   return (
-    <div data-theme={theme} className={styles['toggle-button']} onClick={toggleTheme}>
-      <div className={styles['toggle-thumb']}></div>
-      <Image src="/icons/sun.svg" alt="Sun Icon" width={24} height={24} className={styles.sun} />
-      <Image src="/icons/moon.svg" alt="Moon Icon" width={24} height={24} className={styles.moon} />
-    </div>
+    <button type="button" data-theme={theme} className={styles['toggle-button']} onClick={toggleTheme} aria-label={`Switch to ${nextTheme} theme`}>
+      <span className={styles['toggle-thumb']} />
+      <Image src="/icons/sun.svg" alt="" width={24} height={24} />
+      <Image src="/icons/moon.svg" alt="" width={24} height={24} />
+    </button>
   );
 };
 

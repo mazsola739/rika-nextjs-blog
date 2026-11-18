@@ -3,6 +3,7 @@ import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import { navLinks } from '@/constants/nav';
 import styles from './Nav.module.scss';
 
+/** Navigation links from `navLinks` plus the theme toggle. Used in the header and the mobile menu. */
 const Nav = () => {
   return (
     <nav className={styles.nav}>

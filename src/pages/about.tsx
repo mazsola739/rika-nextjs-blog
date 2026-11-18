@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout/Layout';
 import React from 'react';
 
+/** About page (`/about`). Placeholder content. */
 const About: React.FC = () => {
   return (
     <Layout>

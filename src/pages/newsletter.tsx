@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '@/components/Layout/Layout';
 
+/** Newsletter page (`/newsletter`). Placeholder content. */
 const Newsletter: React.FC = () => {
   return (
     <Layout>

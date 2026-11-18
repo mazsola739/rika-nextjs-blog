@@ -4,6 +4,7 @@
   position: relative;
   width: 96px;
   height: 40px;
+  border: none;
   border-radius: 29px;
   cursor: pointer;
   background-color: $background-color-light;
@@ -28,9 +29,4 @@
   &[data-theme='dark'] .toggle-thumb {
     transform: translateX(40px);
   }
-}
-
-.icon {
-  width: 24px;
-  height: 24px;
 }

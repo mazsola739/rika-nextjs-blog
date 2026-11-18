@@ -59,8 +59,8 @@ h1 {
   font-weight: 700;
   border-top: 1px solid var(--border-color, #{$border-light});
   border-bottom: 1px solid var(--border-color, #{$border-light});
-  @include responsive-font-size($font-size-header-mobile, $font-size-header-tablet, $font-size-header-desktop);
   margin: 30px 0;
+  @include responsive-font-size($font-size-header-mobile, $font-size-header-tablet, $font-size-header-desktop);
 }
 
 p {

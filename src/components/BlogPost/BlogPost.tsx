@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import Tag from '../Tag/Tag';
-import { allTags } from '@/constants/tags';
-import { capitalize } from '@/utils/helpers';
+import { capitalize, formatDate } from '@/utils/helpers';
 import { BlogPostProps } from './BlogPost.props';
-import { formatDate } from '@/utils/helpers';
 import styles from './BlogPost.module.scss';
 import { ArrowUpRight } from '../Icons/Icons';
 
+/**
+ * Blog post card: cover image, date and stats, title, a short excerpt
+ * (first 80 characters), tags and a "Read more" link to the post page.
+ */
 const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
-  const postTags = allTags.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 3) + 2);
-
   return (
     <div className={styles['blog-post']}>
       <img src={post.image} alt={post.title} className={styles['blog-post-image']} />
@@ -28,14 +28,14 @@ const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
 
         <div className={styles['blog-post-footer']}>
           <div className={styles['tags']}>
-            {postTags.map((tag) => (
+            {post.tags.map((tag) => (
               <Tag key={tag} tag={tag} />
             ))}
           </div>
 
           <div className={styles['blog-post-meta']}>
-            <Link href={`/post/${post.id}`}>
-              <button className={styles['read-more']}>Read more</button>
+            <Link href={`/post/${post.id}`} className={styles['read-more']}>
+              Read more
             </Link>
           </div>
         </div>

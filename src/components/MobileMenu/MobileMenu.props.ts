@@ -1,6 +1,6 @@
-import React from 'react';
-
 export interface MobileMenuProps {
+  /** Whether the menu is visible. */
   menuOpen: boolean;
-  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  /** Called when the user clicks the close button. */
+  onClose: () => void;
 }

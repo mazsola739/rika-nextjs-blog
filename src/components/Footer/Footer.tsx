@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styles from './Footer.module.scss';
 import { footerList } from '@/constants/footer';
 
+/** Site footer with the copyright notice and the links from `footerList`. */
 const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>

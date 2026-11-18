@@ -10,33 +10,22 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends(
-    'next/core-web-vitals',
-    'next',
-    'next/typescript',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:prettier/recommended'
-  ),
   {
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-      ecmaFeatures: {
-        jsx: true,
-      },
-      ecmaVersion: 2020,
-      sourceType: 'module',
-    },
+    ignores: ['.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
+  },
+  // next/core-web-vitals already includes next, react-hooks and the TS parser;
+  // next/typescript already includes @typescript-eslint/recommended.
+  ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:react/recommended', 'plugin:prettier/recommended'),
+  {
     settings: {
       react: {
         version: 'detect',
       },
     },
     rules: {
-      'prettier/prettier': 'error',
       'react/react-in-jsx-scope': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      // Props are typed with TypeScript, runtime prop-types are redundant.
+      'react/prop-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },

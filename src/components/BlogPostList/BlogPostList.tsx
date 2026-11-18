@@ -5,17 +5,19 @@ import { BlogPostType } from '@/types/blog';
 import BlogService from '@/services/BlogService';
 import styles from './BlogPostList.module.scss';
 
+/** Number of posts on one page of the "All Blog Posts" section. */
+const POSTS_PER_PAGE = 6;
+
+/**
+ * Home page content. Fetches all posts on the client and renders two sections:
+ * "Recent Blog Posts" (4 random posts) and "All Blog Posts" (paginated).
+ */
 const BlogPostList = () => {
   const [allPosts, setAllPosts] = useState<BlogPostType[]>([]);
-  const [paginatedPosts, setPaginatedPosts] = useState<BlogPostType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 6;
 
   useEffect(() => {
-    BlogService.fetchPosts().then((posts) => {
-      setAllPosts(posts);
-      setPaginatedPosts(posts.slice(0, postsPerPage));
-    });
+    BlogService.fetchPosts().then(setAllPosts);
   }, []);
 
   const recentPosts = useMemo(() => {
@@ -23,11 +25,10 @@ const BlogPostList = () => {
     return [...allPosts].sort(() => 0.5 - Math.random()).slice(0, 4);
   }, [allPosts]);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    const startIndex = (page - 1) * postsPerPage;
-    setPaginatedPosts(allPosts.slice(startIndex, startIndex + postsPerPage));
-  };
+  const paginatedPosts = useMemo(() => {
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    return allPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+  }, [allPosts, currentPage]);
 
   return (
     <div className={styles['blog-post-list']}>
@@ -47,7 +48,7 @@ const BlogPostList = () => {
             <BlogPost key={post.id} post={post} />
           ))}
         </div>
-        <Pagination totalItems={allPosts.length} itemsPerPage={postsPerPage} currentPage={currentPage} onPageChange={handlePageChange} />
+        <Pagination totalItems={allPosts.length} itemsPerPage={POSTS_PER_PAGE} currentPage={currentPage} onPageChange={setCurrentPage} />
       </section>
     </div>
   );
