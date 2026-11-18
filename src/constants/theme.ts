@@ -1,3 +1,4 @@
+/** The two color themes. The CSS reads the active one from `data-theme` on <html>. */
 export type Theme = 'light' | 'dark';
 
 /** Theme the site opens in, until the user switches it. */

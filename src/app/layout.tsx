@@ -9,6 +9,7 @@ import styles from './layout.module.scss';
 /** Self-hosted by Next.js at build time: no request to Google and no layout shift. */
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 
+/** Site title and description. Pages set their own title, which goes into the template. */
 export const metadata: Metadata = {
   title: {
     default: "Rika's Blog",
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
   description: 'A simple, responsive blog built with Next.js, React and SCSS.',
 };
 
+/** Both themes are supported, so the browser styles scrollbars and form controls to match. */
 export const viewport: Viewport = {
   colorScheme: 'dark light',
 };

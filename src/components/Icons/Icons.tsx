@@ -5,24 +5,28 @@ import type { SVGProps } from 'react';
  * so the color can be set with CSS.
  */
 
+/** Left arrow: "Previous" in the pagination and "All posts" on the post page. */
 export const ArrowLeft = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={20} height={21} fill="currentColor" {...props}>
     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.67} d="M15.833 10.5H4.167m0 0L10 16.333M4.167 10.5 10 4.667" />
   </svg>
 );
 
+/** Right arrow: "Next" in the pagination. */
 export const ArrowRight = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={20} height={21} fill="currentColor" {...props}>
     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.67} d="M4.167 10.5h11.666m0 0L10 4.667m5.833 5.833L10 16.333" />
   </svg>
 );
 
+/** Diagonal arrow next to the post titles in the listing. */
 export const ArrowUpRight = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="currentColor" {...props}>
     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17 17 7m0 0H7m10 0v10" />
   </svg>
 );
 
+/** Hamburger icon of the button that opens the mobile menu. */
 export const HamburgerMenu = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} fill="currentColor" {...props}>
     <g clipPath="url(#a)">
@@ -36,6 +40,7 @@ export const HamburgerMenu = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+/** Close (X) icon of the mobile menu. */
 export const Close = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} fill="currentColor" {...props}>
     <path d="M24.532 23.075 9.353 7.895a1.267 1.267 0 0 0-1.791 0l-.094.095a1.267 1.267 0 0 0 0 1.791l15.179 15.18a1.267 1.267 0 0 0 1.791 0l.094-.095a1.267 1.267 0 0 0 0-1.791Z" />

@@ -1,5 +1,10 @@
 import type { NextConfig } from 'next';
 
+/**
+ * Next.js configuration. The site is built as a static export for GitHub Pages;
+ * see the Deployment section of the README for how the base path is set.
+ */
+
 const nextConfig: NextConfig = {
   // Static export: `next build` writes plain HTML, CSS and JS files to `out/`, which GitHub Pages hosts.
   output: 'export',

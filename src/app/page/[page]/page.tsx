@@ -16,6 +16,7 @@ export async function generateStaticParams() {
   return Array.from({ length: getPageCount(posts.length) - 1 }, (_, index) => ({ page: String(index + 2) }));
 }
 
+/** Page title, e.g. "Page 2 | Rika's Blog". */
 export async function generateMetadata({ params }: ListPageProps): Promise<Metadata> {
   const { page } = await params;
   return { title: `Page ${page}` };

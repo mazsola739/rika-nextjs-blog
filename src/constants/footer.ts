@@ -1,12 +1,17 @@
 import type { Route } from 'next';
 import { BASE_PATH, PORTFOLIO_URL, REPO_URL } from './site';
 
-/** A footer link: external links open in a new tab, internal ones use client-side navigation. */
+/**
+ * A footer link. External links leave the blog and open in a new tab (an email
+ * link opens the mail app); internal ones are pages of the blog, opened with
+ * client-side navigation.
+ */
 export type FooterLink = { name: string; url: string; external: true } | { name: string; url: Route; external: false };
 
 /** Copyright line under the footer links. The blog was built in 2023 and renovated in 2026. */
 export const copyrightText = '© 2023 Rika · Fully renovated in 2026, original lorem ipsum preserved.';
 
+/** Links of the footer, in display order. Twitter, LinkedIn and Email are placeholders from the design. */
 export const footerList: FooterLink[] = [
   { name: 'Portfolio', url: PORTFOLIO_URL, external: true },
   { name: 'GitHub', url: REPO_URL, external: true },
