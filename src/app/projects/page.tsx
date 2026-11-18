@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import ExternalLink from '@/components/ExternalLink/ExternalLink';
 import { PORTFOLIO_URL } from '@/constants/site';
 
 export const metadata: Metadata = { title: 'Projects' };
@@ -9,7 +10,7 @@ export default function ProjectsPage() {
     <section>
       <h2>Projects</h2>
       <p>
-        My projects, from the first small ones to complex systems, are collected in my <a href={PORTFOLIO_URL}>portfolio</a>.
+        My projects, from the first small ones to complex systems, are collected in my <ExternalLink href={PORTFOLIO_URL}>portfolio</ExternalLink>.
       </p>
     </section>
   );

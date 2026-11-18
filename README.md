@@ -116,7 +116,7 @@ scripts/
   - The current page is marked with `aria-current="page"` in the navigation.
   - Animations are turned off when the user prefers reduced motion.
 - **RSS feed** at `/rss.xml`, linked from the footer.
-- **Links to the portfolio** in the footer and on the Projects page, together with a link to the source code on GitHub.
+- **Links to the portfolio** in the footer and on the Projects page, together with a link to the source code on GitHub. Links that leave the blog open in a new tab, and screen readers announce it.
 
 ## Bonus Features
 

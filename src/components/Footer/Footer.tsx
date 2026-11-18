@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import styles from './Footer.module.scss';
+import ExternalLink from '../ExternalLink/ExternalLink';
 import { copyrightText, footerList } from '@/constants/footer';
 
 /**
  * Site footer: the links from `footerList` (portfolio, source code, socials,
  * RSS feed) and the copyright line below them.
- * Links to other websites open in a new tab.
+ * Links that leave the blog open in a new tab; the email link opens the mail app.
  */
 const Footer = () => {
   return (
@@ -13,10 +14,10 @@ const Footer = () => {
       <ul className={styles.list}>
         {footerList.map((item) => (
           <li key={item.name}>
-            {item.external ? (
-              <a href={item.url} {...(item.url.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}>
-                {item.name}
-              </a>
+            {item.external && item.url.startsWith('mailto:') ? (
+              <a href={item.url}>{item.name}</a>
+            ) : item.external ? (
+              <ExternalLink href={item.url}>{item.name}</ExternalLink>
             ) : (
               <Link href={item.url}>{item.name}</Link>
             )}
