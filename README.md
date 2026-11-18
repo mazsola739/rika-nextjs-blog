@@ -120,7 +120,7 @@ scripts/
 
 ## Bonus Features
 
-- **Dark mode toggle:** the site opens in the dark theme. The toggle switches to light mode and back, and the choice is saved in `localStorage`. A small inline script applies the saved theme before the first paint, so there is no flash of the wrong theme.
+- **Dark mode toggle:** the site always opens in the dark theme. The toggle switches to light mode and back, and the choice is kept for the rest of the visit (`sessionStorage`), so every new visit starts dark again. A small inline script applies the choice before the first paint, so a reload never flashes the wrong theme.
 - **Dynamic reading time:** calculated from the word count at an average reading speed of 200 words per minute.
 - **View counter:** each post shows a view count. It is simulated, because the mock API has no view data.
 

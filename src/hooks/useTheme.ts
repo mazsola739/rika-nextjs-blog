@@ -20,7 +20,8 @@ const getServerSnapshot = (): Theme => DEFAULT_THEME;
 
 /**
  * Returns the active theme and a function that switches it.
- * The choice is saved to localStorage, so it is kept on the next visit.
+ * The choice is saved to sessionStorage: it is kept for this visit, and every
+ * new visit opens in the default dark theme again.
  */
 export const useTheme = () => {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
@@ -29,7 +30,7 @@ export const useTheme = () => {
     const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = nextTheme;
     try {
-      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+      sessionStorage.setItem(THEME_STORAGE_KEY, nextTheme);
     } catch {
       // Storage can be unavailable (e.g. private mode); the theme still switches for this visit.
     }
