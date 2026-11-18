@@ -26,6 +26,8 @@
   }
 
   a {
+    @include flex-layout(row, center, center);
+    gap: 6px;
     text-decoration: none;
     color: inherit;
 
@@ -33,6 +35,10 @@
       text-decoration: underline;
     }
   }
+}
+
+.icon {
+  flex-shrink: 0;
 }
 
 .copyright {

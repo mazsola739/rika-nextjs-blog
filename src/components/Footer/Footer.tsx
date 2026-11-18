@@ -1,11 +1,19 @@
 import Link from 'next/link';
 import styles from './Footer.module.scss';
 import ExternalLink from '../ExternalLink/ExternalLink';
-import { copyrightText, footerList } from '@/constants/footer';
+import { copyrightText, footerList, type FooterLink } from '@/constants/footer';
+
+/** Icon and name of a footer link. The icon is decorative: the name says where the link goes. */
+const LinkContent = ({ name, icon: Icon }: FooterLink) => (
+  <>
+    <Icon aria-hidden="true" className={styles.icon} />
+    {name}
+  </>
+);
 
 /**
  * Site footer: the links from `footerList` (portfolio, source code, socials,
- * RSS feed) and the copyright line below them.
+ * RSS feed), each with an icon, and the copyright line below them.
  * Links that leave the blog open in a new tab; the email link opens the mail app.
  */
 const Footer = () => {
@@ -15,11 +23,17 @@ const Footer = () => {
         {footerList.map((item) => (
           <li key={item.name}>
             {item.external && item.url.startsWith('mailto:') ? (
-              <a href={item.url}>{item.name}</a>
+              <a href={item.url}>
+                <LinkContent {...item} />
+              </a>
             ) : item.external ? (
-              <ExternalLink href={item.url}>{item.name}</ExternalLink>
+              <ExternalLink href={item.url}>
+                <LinkContent {...item} />
+              </ExternalLink>
             ) : (
-              <Link href={item.url}>{item.name}</Link>
+              <Link href={item.url}>
+                <LinkContent {...item} />
+              </Link>
             )}
           </li>
         ))}

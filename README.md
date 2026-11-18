@@ -157,7 +157,7 @@ scripts/
 | `Nav`          | Main navigation; marks the current page (client component).                                              |
 | `MobileMenu`   | Slide-in menu on small screens, built on the native Popover API (client component).                      |
 | `ThemeToggle`  | Light/dark switch (client component).                                                                    |
-| `Footer`       | Footer links (portfolio, GitHub, socials, RSS feed) and the copyright line.                              |
+| `Footer`       | Footer links with icons (portfolio, GitHub, socials, RSS feed) and the copyright line.                   |
 | `ExternalLink` | Link that leaves the blog: opens in a new tab and tells screen readers so.                               |
 | `Tag`          | Colored tag pill; the color comes from the tag name.                                                     |
 | `Icons`        | Inline SVG icons that take their color from the text (`currentColor`).                                   |
