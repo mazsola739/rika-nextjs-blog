@@ -1,35 +1,41 @@
-import React from 'react';
+'use client';
+
+import type { Route } from 'next';
+import { useRouter } from 'next/navigation';
 import ReactPaginate from 'react-paginate';
+import { BASE_PATH } from '@/constants/site';
+import { getPageRoute } from '@/utils/pagination';
 import styles from './Pagination.module.scss';
 import { PaginationProps } from './Pagination.props';
 import { ArrowLeft, ArrowRight } from '../Icons/Icons';
 
+/** Route of a page of "All Blog Posts". The hash scrolls back to the top of the section. */
+const pageRoute = (page: number) => `${getPageRoute(page)}#all-posts` as Route;
+
 /**
- * Controlled pagination built on `react-paginate`.
+ * Pagination for "All Blog Posts", built on `react-paginate`.
  *
- * Pages are 1-based in the props; `react-paginate` is 0-based, so the values
- * are converted here. Renders nothing while there are no items.
+ * Every page has its own static URL (`/`, `/page/2`, ...): every control is a
+ * real link (so it also works without JavaScript and can be opened in a new
+ * tab), and a click navigates on the client with the Next.js router.
+ * Pages are 1-based in the props and URLs; `react-paginate` is 0-based.
  */
-const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
+  const router = useRouter();
 
-  if (totalPages === 0) return null;
-
-  const handlePageClick = (selectedItem: { selected: number }) => {
-    onPageChange(selectedItem.selected + 1);
-  };
+  if (totalPages <= 1) return null;
 
   return (
-    <div className={styles['pagination-container']}>
+    <nav className={styles['pagination-container']} aria-label="Pagination">
       <ReactPaginate
         previousLabel={
           <span className={styles['page-button']}>
-            <ArrowLeft /> Previous
+            <ArrowLeft aria-hidden="true" /> Previous
           </span>
         }
         nextLabel={
           <span className={styles['page-button']}>
-            Next <ArrowRight />
+            Next <ArrowRight aria-hidden="true" />
           </span>
         }
         breakLabel="..."
@@ -37,11 +43,15 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, curre
         forcePage={currentPage - 1}
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
-        onPageChange={handlePageClick}
+        // Plain <a> links, not next/link, so the base path is added by hand.
+        // Previous/Next ask for page 0 and totalPages + 1 when disabled; keep their links in range.
+        hrefBuilder={(page, pageCount) => `${BASE_PATH}${pageRoute(Math.min(Math.max(page, 1), pageCount))}`}
+        hrefAllControls
+        onPageChange={({ selected }) => router.push(pageRoute(selected + 1))}
         activeClassName={styles.active}
         disabledClassName={styles.disabled}
       />
-    </div>
+    </nav>
   );
 };
 

@@ -1,0 +1,54 @@
+# Builds the blog as a static site and publishes it to GitHub Pages:
+# https://mazsola739.github.io/rika-nextjs-blog/
+#
+# Runs on every push to main, and can be started by hand from the Actions tab.
+# One-time setup in the repository: Settings -> Pages -> Source: GitHub Actions.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; a newer push waits instead of cancelling a running deployment.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
+      - id: pages
+        uses: actions/configure-pages@v6
+      # base_path is `/rika-nextjs-blog`, base_url the full site URL (used by the RSS feed).
+      - run: yarn build
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

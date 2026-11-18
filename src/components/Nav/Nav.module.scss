@@ -5,10 +5,8 @@
   align-items: center;
   gap: 20px;
 
-  @media (max-width: 768px) {
-    display: flex;
+  @media (max-width: 767px) {
     flex-direction: column;
-    align-items: center;
     padding: 8px;
     font-size: $font-size-title;
     font-weight: 400;
@@ -17,9 +15,15 @@
 
 .nav-link {
   text-decoration: none;
+  text-underline-offset: 6px;
   color: var(--text-color);
 
-  @media (max-width: 768px) {
+  &:hover,
+  &[aria-current='page'] {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 767px) {
     margin-bottom: 10px;
   }
 }

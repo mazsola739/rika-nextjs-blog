@@ -1,8 +1,6 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 *,
 *::before,
 *::after {
@@ -11,20 +9,26 @@
   padding: 0;
 }
 
-html,
-body {
-  overflow-x: hidden;
-  width: 100%;
-  height: 100%;
+/*
+ * Theme colors. Dark is the default; the light theme is applied when <html>
+ * has data-theme="light" (set by the inline script or the theme toggle).
+ */
+:root {
+  color-scheme: dark;
+  @include theme-variables(
+    $background-color-dark,
+    $text-color-dark,
+    $border-dark,
+    $date-color-dark,
+    $blog-details-text-dark,
+    $pagination-base-color-dark,
+    $pagination-hover-bg-color-dark,
+    $pagination-hover-text-color-dark
+  );
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--background-color, #{$background-color-light});
-  color: var(--text-color, #{$text-color-light});
-  font-size: $font-size;
-  font-weight: 400;
-
+:root[data-theme='light'] {
+  color-scheme: light;
   @include theme-variables(
     $background-color-light,
     $text-color-light,
@@ -35,37 +39,47 @@ body {
     $pagination-hover-bg-color-light,
     $pagination-hover-text-color-light
   );
+}
 
-  &.dark {
-    @include theme-variables(
-      $background-color-dark,
-      $text-color-dark,
-      $border-dark,
-      $date-color-dark,
-      $blog-details-text-dark,
-      $pagination-base-color-dark,
-      $pagination-hover-bg-color-dark,
-      $pagination-hover-text-color-dark
-    );
-  }
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
 
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: $font-size;
+  font-weight: 400;
   transition:
     background-color 0.5s ease,
-    color 0.5s ease,
-    border-color 0.5s ease;
+    color 0.5s ease;
 }
 
 h1 {
+  width: 100%;
   font-weight: 700;
-  border-top: 1px solid var(--border-color, #{$border-light});
-  border-bottom: 1px solid var(--border-color, #{$border-light});
+  line-height: 1.1;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   margin: 30px 0;
   @include responsive-font-size($font-size-header-mobile, $font-size-header-tablet, $font-size-header-desktop);
 }
 
 p {
-  color: var(--blog-post-color, #{$blog-details-text-light});
+  color: var(--blog-post-color);
   font-weight: 400;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 nav {
@@ -74,4 +88,19 @@ nav {
 
 footer {
   font-size: $font-size-footer;
+}
+
+/* Visible focus ring for keyboard users only. */
+:focus-visible {
+  outline: 2px solid var(--date-color);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

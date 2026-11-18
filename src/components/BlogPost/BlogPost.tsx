@@ -1,6 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import Tag from '../Tag/Tag';
-import { capitalize, formatDate } from '@/utils/helpers';
+import { capitalize, formatDate, formatNumber, truncate } from '@/utils/helpers';
 import { BlogPostProps } from './BlogPost.props';
 import styles from './BlogPost.module.scss';
 import { ArrowUpRight } from '../Icons/Icons';
@@ -9,38 +10,42 @@ import { ArrowUpRight } from '../Icons/Icons';
  * Blog post card: cover image, date and stats, title, a short excerpt
  * (first 80 characters), tags and a "Read more" link to the post page.
  */
-const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
+const BlogPost = ({ post, imageSizes, preloadImage = false }: BlogPostProps) => {
+  const href = `/posts/${post.id}` as const;
+
   return (
-    <div className={styles['blog-post']}>
-      <img src={post.image} alt={post.title} className={styles['blog-post-image']} />
+    <article className={styles['blog-post']}>
+      <Image src={post.image} alt={post.title} width={800} height={400} sizes={imageSizes} preload={preloadImage} className={styles['blog-post-image']} />
 
       <div className={styles['blog-post-content']}>
-        <div className={styles['blog-post-date']}>
-          {formatDate(post.date)} • {post.views} views • {post.readingTime}
-        </div>
+        <p className={styles['blog-post-date']}>
+          <time dateTime={post.date}>{formatDate(post.date)}</time> • {formatNumber(post.views)} views • {post.readingTime}
+        </p>
 
-        <div className={styles['blog-post-title']}>
-          <h3>{capitalize(post.title)}</h3>
-          <ArrowUpRight />
-        </div>
+        <h3 className={styles['blog-post-title']}>
+          <Link href={href}>{capitalize(post.title)}</Link>
+          <ArrowUpRight aria-hidden="true" />
+        </h3>
 
-        <p className={styles['blog-post-description']}>{post.description.length > 80 ? `${post.description.substring(0, 80)}...` : post.description}</p>
+        <p className={styles['blog-post-description']}>{truncate(post.description, 80)}</p>
 
         <div className={styles['blog-post-footer']}>
-          <div className={styles['tags']}>
+          <ul className={styles.tags} aria-label="Tags">
             {post.tags.map((tag) => (
-              <Tag key={tag} tag={tag} />
+              <li key={tag}>
+                <Tag tag={tag} />
+              </li>
             ))}
-          </div>
+          </ul>
 
           <div className={styles['blog-post-meta']}>
-            <Link href={`/post/${post.id}`} className={styles['read-more']}>
+            <Link href={href} className={styles['read-more']} aria-label={`Read more: ${capitalize(post.title)}`}>
               Read more
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

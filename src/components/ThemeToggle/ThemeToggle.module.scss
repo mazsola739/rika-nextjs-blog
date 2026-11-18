@@ -14,19 +14,20 @@
   padding: 8px 16px;
   transition: background-color 0.3s ease;
   overflow: hidden;
+}
 
-  .toggle-thumb {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    background-color: $background-color-dark;
-    border-radius: 50%;
-    top: 8px;
-    left: 16px;
-    transition: transform 0.3s ease;
-  }
+.toggle-thumb {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: $background-color-dark;
+  border-radius: 50%;
+  top: 8px;
+  left: 16px;
+  transition: transform 0.3s ease;
+}
 
-  &[data-theme='dark'] .toggle-thumb {
-    transform: translateX(40px);
-  }
+// Read the theme from <html>, so the thumb is in the right place before hydration.
+:global(:root[data-theme='dark']) .toggle-thumb {
+  transform: translateX(40px);
 }
