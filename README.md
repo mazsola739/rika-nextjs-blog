@@ -250,3 +250,7 @@ scripts/
 - Push the code to a public GitHub repository.
 - Include a link to the Figma design used.
 - Provide a brief explanation of the approach and of any bonus features implemented.
+
+## License
+
+[MIT](LICENSE)
