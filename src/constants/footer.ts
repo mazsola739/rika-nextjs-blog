@@ -18,7 +18,7 @@ export const copyrightText = '© 2023 Rika · Fully renovated in 2026, original 
 
 /** Links of the footer, in display order. Twitter, LinkedIn and Email are placeholders from the design. */
 export const footerList: FooterLink[] = [
-  { name: 'Portfolio', icon: Globe, url: PORTFOLIO_URL, external: true },
+  { name: 'mazsola739', icon: Globe, url: PORTFOLIO_URL, external: true },
   { name: 'GitHub', icon: GitHub, url: REPO_URL, external: true },
   { name: 'Twitter', icon: Twitter, url: 'https://twitter.com', external: true },
   { name: 'LinkedIn', icon: LinkedIn, url: 'https://linkedin.com', external: true },
